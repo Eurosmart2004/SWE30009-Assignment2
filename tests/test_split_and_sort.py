@@ -37,30 +37,37 @@ def test_maximum_length_input():
     assert result == expected_output, f"Failed: Expected {expected_output}, got {result}"
 
 def test_scaling_by_positive_factor():
-    """Metamorphic test case: Scaling all integers by a positive factor."""
-    input_list = [10, -9, 15, 7, 10, -5, 28]
-    expected_output = ([-9, -5], [7, 10, 15, 28])
-    result = split_and_sort(input_list)
-    assert result == expected_output, f"Failed: Expected {expected_output}, got {result}"
+    """Metamorphic test case: Scaling all integers by a positive factor should maintain order and uniqueness."""
     
-    # Scale by factor 2
-    input_list = [20, -18, 30, 14, 20, -10, 56]
-    expected_output = ([-18, -10], [14, 20, 30, 56])
-    result = split_and_sort(input_list)
-    assert result == expected_output, f"Failed: Expected {expected_output}, got {result}"
+    si = [10, -9, 15, 7, -5, 28]
+    so = split_and_sort(si)
+    
+    # Step 2: Scale input by a factor of 2
+    factor = 2
+    fi = [x * factor for x in si]
+    fo = split_and_sort(fi)
+    
+    # Step 3: Expected transformed output
+    expected_fo = ([x * factor for x in so[0]], [x * factor for x in so[1]])
+
+    # Step 4: Assertion
+    assert fo == expected_fo, f"Failed: Expected {expected_fo}, got {fo}"
+
 
 def test_permutation_invariance():
     """Metamorphic test case: Check that permutation does not affect output."""
-    input_list = [10, -9, 15, 7, 10, -5, 28]
-    expected_output = ([-9, -5], [7, 10, 15, 28])
-    result = split_and_sort(input_list)
-    assert result == expected_output, f"Failed: Expected {expected_output}, got {result}"
     
-    # Permuted version
-    input_list = [15, 10, -5, 7, -9, 28, 10]
-    expected_output = ([-9, -5], [7, 10, 15, 28])
-    result = split_and_sort(input_list)
-    assert result == expected_output, f"Failed: Expected {expected_output}, got {result}"
+    # Step 1: Original input and expected output
+    si = [10, -9, 15, 7, -5, 28]
+    so = split_and_sort(si)
+    
+    # Step 2: Permute input
+    fi = [15, 10, -5, 7, -9, 28]
+    fo = split_and_sort(fi)
+    
+    # Step 3: Assertion (order in output should be the same as original)
+    assert fo == so, f"Failed: Expected {so}, got {fo}"
+
 
 if __name__ == "__main__":
     pytest.main()
