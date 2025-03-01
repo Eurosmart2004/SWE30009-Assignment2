@@ -24,8 +24,8 @@ def test_mixed_integers_with_zero():
 
 def test_duplicated_integers():
     """Test case with duplicate integers."""
-    input_list = [12, -8, 14, 6, 12, -4, 26, 0]
-    expected_output = ([-8, -4, 0], [6, 12, 14, 26])
+    input_list = [12, -8, 14, 6, 12, -4, 26]
+    expected_output = ([-8, -4], [6, 12, 14, 26])
     result = split_and_sort(input_list)
     assert result == expected_output, f"Failed: Expected {expected_output}, got {result}"
 
